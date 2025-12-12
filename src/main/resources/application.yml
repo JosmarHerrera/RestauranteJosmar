@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: restaurante
+
+eureka:
+  client:
+ 
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+ 
+    eviction-interval-timer-in-ms: 60000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+
