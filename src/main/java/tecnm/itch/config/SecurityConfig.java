@@ -62,7 +62,7 @@ public class SecurityConfig {
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
-		config.addAllowedOriginPattern("http://localhost:3000");
+		config.addAllowedOriginPattern("http://localhost:3000","https://frontend-production-bc2f.up.railway.app");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
 
