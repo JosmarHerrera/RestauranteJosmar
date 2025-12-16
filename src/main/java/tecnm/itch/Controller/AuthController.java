@@ -23,7 +23,7 @@ import tecnm.itch.Entity.Usuario; // <-- IMPORTANTE
 import tecnm.itch.Repository.UsuarioRepository;
 import tecnm.itch.Service.AuthService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://frontjosmar-production.up.railway.app")
 @RestController
 public class AuthController {
 
