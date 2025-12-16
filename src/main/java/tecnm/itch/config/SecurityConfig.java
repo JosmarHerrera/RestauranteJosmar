@@ -24,11 +24,18 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(corsConfigurationSource()))
+		http.csrf(csrf -> csrf.disable())
+				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 				.authorizeHttpRequests(auth -> auth
-						// Endpoints públicos
-						.requestMatchers("/auth/login", "/auth/register").permitAll().requestMatchers("/api/cliente")
-						.permitAll() // si quieres permitir crear desde front
+						// ✅ Endpoints públicos (AGREGADOS los nuevos)
+						.requestMatchers(
+								"/auth/login",
+								"/auth/register",
+								"/auth/register/empleado",
+								"/auth/register/cliente/**"
+						).permitAll()
+
+						.requestMatchers("/api/cliente").permitAll()
 						.requestMatchers("/api/cliente/**").permitAll()
 
 						// Otros recursos protegidos
@@ -42,15 +49,15 @@ public class SecurityConfig {
 
 						// Cualquier otra petición requiere autenticación
 						.anyRequest().permitAll())
-				// Login por formulario (si lo usas)
-				.formLogin(form -> form.permitAll()).logout(logout -> logout.permitAll());
+				.formLogin(form -> form.permitAll())
+				.logout(logout -> logout.permitAll());
 
 		return http.build();
 	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		 return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
 
 	@Bean
@@ -62,7 +69,11 @@ public class SecurityConfig {
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
+
+		// ✅ Permitir local y Railway (AGREGADO)
 		config.addAllowedOriginPattern("http://localhost:3000");
+		config.addAllowedOriginPattern("https://frontjosmar-production.up.railway.app");
+
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
 
