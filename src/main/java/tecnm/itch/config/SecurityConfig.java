@@ -72,7 +72,7 @@ public class SecurityConfig {
 
 		// ✅ Permitir local y Railway (AGREGADO)
 		config.addAllowedOriginPattern("http://localhost:3000");
-		config.addAllowedOriginPattern("https://frontjosmar-production.up.railway.app");
+		config.addAllowedOriginPattern("https://frontjosmar-production-fb4a.up.railway.app");
 
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
